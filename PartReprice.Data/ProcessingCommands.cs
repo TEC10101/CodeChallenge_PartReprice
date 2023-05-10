@@ -15,6 +15,7 @@ namespace PartReprice.Data
         {
             List<PartData> partDataList = new List<PartData>();
 
+            string currentDirectory = Directory.GetCurrentDirectory();
             string[] lines = File.ReadAllLines(filePath);
 
             foreach (string line in lines)

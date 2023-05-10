@@ -6,6 +6,9 @@ namespace PartReprice.UnitTests
     [TestClass]
     public class ProcessingCommandsTests
     {
+        private const string FileNamePartData = "PartData.txt";
+        private const string FileNameRepriceData = "RepriceData.txt";
+
         private const string KnownGoodPartData = @"PartID*!*PartDesc*!*Price
 1*!*Super Cool Part*!*1.2
 2*!*Another Awesome Part*!*1.3
@@ -54,9 +57,13 @@ namespace PartReprice.UnitTests
         [TestMethod]
         public void TestRepriceThePartData_HappyPath()
         {
-            var pristinePartData = PartReprice.Data.ProcessingCommands.ReadPartDataFromFile(@"A:\Projects\CSharp\GlobalShopSolutionsDemo\PartReprice\PartReprice.UnitTests\TestData\PartData.txt");
-            var partDataList = PartReprice.Data.ProcessingCommands.ReadPartDataFromFile(@"A:\Projects\CSharp\GlobalShopSolutionsDemo\PartReprice\PartReprice.UnitTests\TestData\PartData.txt");
-            var repriceList = PartReprice.Data.ProcessingCommands.ReadRepricesFromFile(@"A:\Projects\CSharp\GlobalShopSolutionsDemo\PartReprice\PartReprice.UnitTests\TestData\RepriceData.txt");
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string filePathPartData = Path.Combine(currentDirectory, FileNamePartData);
+            string fileameRepriceData = Path.Combine(currentDirectory, FileNameRepriceData);
+
+            var pristinePartData = PartReprice.Data.ProcessingCommands.ReadPartDataFromFile(filePathPartData);
+            var partDataList = PartReprice.Data.ProcessingCommands.ReadPartDataFromFile(filePathPartData);
+            var repriceList = PartReprice.Data.ProcessingCommands.ReadRepricesFromFile(fileameRepriceData);
 
             if (pristinePartData == null || partDataList == null || repriceList == null)
             {

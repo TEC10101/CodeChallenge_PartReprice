@@ -19,4 +19,13 @@
     <ProjectReference Include="..\PartReprice.Data\PartReprice.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TestData\PartData.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\RepriceData.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
