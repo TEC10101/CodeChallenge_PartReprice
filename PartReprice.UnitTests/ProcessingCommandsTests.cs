@@ -1,5 +1,4 @@
 using PartReprice.Data;
-using PartReprice.Data.Models;
 
 namespace PartReprice.UnitTests
 {
@@ -8,6 +7,8 @@ namespace PartReprice.UnitTests
     {
         private const string FileNamePartData = "PartData.txt";
         private const string FileNameRepriceData = "RepriceData.txt";
+        private string filePathPartData = "";
+        private string filePathRepriceData = "";
 
         private const string KnownGoodPartData = @"PartID*!*PartDesc*!*Price
 1*!*Super Cool Part*!*1.2
@@ -19,13 +20,25 @@ namespace PartReprice.UnitTests
 2*!*1.2
 3*!*1000";
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            string currentDirectory = Directory.GetCurrentDirectory();
+            this.filePathPartData = Path.Combine(currentDirectory, FileNamePartData);
+            this.filePathRepriceData = Path.Combine(currentDirectory, FileNameRepriceData);
+
+            // Create the test data files.
+            File.WriteAllText(filePathPartData, KnownGoodPartData);
+            File.WriteAllText(filePathRepriceData, KnownGoodRepriceData);
+        }
+
         /// <summary>
         /// Test Case: Ensure the Part Data is read correctly and the method functions as expected.
         /// </summary>
         [TestMethod]
         public void TestReadPartData_HappyPath()
         {
-            var partDataList = PartReprice.Data.ProcessingCommands.ReadPartDataFromFile(@"A:\Projects\CSharp\GlobalShopSolutionsDemo\PartReprice\PartReprice.UnitTests\TestData\PartData.txt");
+            var partDataList = ProcessingCommands.ReadPartDataFromFile(this.filePathPartData);
 
             if (partDataList == null)
             {
@@ -41,7 +54,7 @@ namespace PartReprice.UnitTests
         [TestMethod]
         public void TestReadRepriceData_HappyPath()
         {
-            var repriceList = PartReprice.Data.ProcessingCommands.ReadRepricesFromFile(@"A:\Projects\CSharp\GlobalShopSolutionsDemo\PartReprice\PartReprice.UnitTests\TestData\RepriceData.txt");
+            var repriceList = ProcessingCommands.ReadRepricesFromFile(this.filePathRepriceData);
 
             if (repriceList == null)
             {
@@ -61,9 +74,9 @@ namespace PartReprice.UnitTests
             string filePathPartData = Path.Combine(currentDirectory, FileNamePartData);
             string fileameRepriceData = Path.Combine(currentDirectory, FileNameRepriceData);
 
-            var pristinePartData = PartReprice.Data.ProcessingCommands.ReadPartDataFromFile(filePathPartData);
-            var partDataList = PartReprice.Data.ProcessingCommands.ReadPartDataFromFile(filePathPartData);
-            var repriceList = PartReprice.Data.ProcessingCommands.ReadRepricesFromFile(fileameRepriceData);
+            var pristinePartData = ProcessingCommands.ReadPartDataFromFile(filePathPartData);
+            var partDataList = ProcessingCommands.ReadPartDataFromFile(filePathPartData);
+            var repriceList = ProcessingCommands.ReadRepricesFromFile(fileameRepriceData);
 
             if (pristinePartData == null || partDataList == null || repriceList == null)
             {
@@ -86,6 +99,7 @@ namespace PartReprice.UnitTests
         /// TODO
         /// </summary>
         [TestMethod]
+        [Ignore]
         public void TestReadPartData_BadData()
         {
             // Use bad data format and pass it into methods.
