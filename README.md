@@ -8,6 +8,7 @@ After writing the code for about 60-90 mins, I was advised by the recruiter that
 At that time I polished up what I had, made sure it built and handled the scenario, published here to GitHub, setup the CI Build and Test action yaml, and finalized the code.
 
 ### If I were to continue
+Correctly implement the feature of making an `Output File` instead of overwriting the `Part Data File` (as-is).
 I'd want some more test cases that handled **Bad Data** situations.
 I'd add XML documentation to every method and property.
 I'd consider how to make the data methods more generic so that I could handle any record type, not just a PartData record.
@@ -29,7 +30,6 @@ PartID*!*PartDesc*!*Price
 2*!*Another Awesome Part*!*1.3
 3*!*Expensive Part*!*999.99
 ```
-
 
 Part Reprice File
 ```
